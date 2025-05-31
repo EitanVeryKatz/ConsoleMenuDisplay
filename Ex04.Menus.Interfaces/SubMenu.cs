@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ex04.Menus.Test
+namespace Ex04.Menus.Interfaces
 {
     internal class SubMenu : MenuItem, IListener
     {
         private List<MenuItem> m_SubMenuItems = new List<MenuItem>();
-
-        public SubMenu(string name) : base(name)
+        public string Name { get; private set; }
+        public IListener Listener { get; private set; }
+        public SubMenu(string i_Name, IListener i_Listener) : base(i_Name)
         {
+            Name = i_Name;
+            Listener = i_Listener;
         }
-
         public void AddSubMenuItem(MenuItem i_MenuItem)
         {
             i_MenuItem.SetListener(this); // Set this submenu as the listener

@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ex04.Menus.Interfaces;
 
-namespace Ex04.Menus.Test
+namespace Ex04.Menus.Interfaces
 {
     internal class MainMenu : IListener
     {
         private Stack<SubMenu> historyStack = new Stack<SubMenu>();
         public SubMenu CurrentMenu { get; private set; } = null;
         private List<MenuItem> m_MenuItems = new List<MenuItem>();
-        public string Name { get; private set; }
+        public MainMenu()
+        {
+            CurrentMenu = new SubMenu("Main Menu", this);
+            historyStack.Push(CurrentMenu);
+        }
+        public MainMenu(string i_Title)
+        {
+            CurrentMenu = new SubMenu(i_Title, this);
+            historyStack.Push(CurrentMenu);
+        }
 
         public void AddMenuItem(MenuItem i_MenuItem)
         {
