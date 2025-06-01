@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace Ex04.Menus.Interfaces
+using Ex04.Menus.Interfaces;
+namespace Ex04.Menus.Test
 {
     internal class Program
     {
         public static void Main()
         {
-            MainMenu mainMenu = new MainMenu("Main Menu");
+            MainMenu mainMenu = new MainMenu("Main Menu", new Functions());
             //MainMenu mainMenu = new MainMenu();
 
             SubMenu subMenu1 = new SubMenu("Sub Menu 1", mainMenu);
@@ -21,7 +21,7 @@ namespace Ex04.Menus.Interfaces
             mainMenu.AddMenuItem(subMenu1);
             mainMenu.AddMenuItem(subMenu2);
             mainMenu.EnterSubMenu("Sub Menu 1");
-            mainMenu.AddMenuItem(item1,someclass);
+            mainMenu.AddMenuItem(item1);
             mainMenu.AddMenuItem(item2);
             mainMenu.ResetToDefaultMenu();
             mainMenu.EnterSubMenu("Sub Menu 2");

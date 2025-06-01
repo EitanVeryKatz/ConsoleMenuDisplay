@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    internal interface IListener
+    public interface IListener
     {
         void ReportChosen(MenuItem i_menuItem);
     }

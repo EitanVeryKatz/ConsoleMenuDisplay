@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Ex04.Menus.Interfaces
 {
-    internal class MainMenu : IListener
+    public class MainMenu : IListener
     {
         private readonly Stack r_HistoryStack = new Stack();
         private bool m_isRunning = false;

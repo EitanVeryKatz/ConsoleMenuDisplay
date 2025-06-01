@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Ex04.Menus.Interfaces
 {
-    internal class SubMenu : MenuItem
+    public class SubMenu : MenuItem
     {
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
         public SubMenu(string i_Name, IListener i_Listener) : base(i_Name, i_Listener)
@@ -58,6 +58,9 @@ namespace Ex04.Menus.Interfaces
                 Console.WriteLine("Invalid choice. Please try again.");
                 return getInput();
             }
+
+            Console.Clear();
+
             return input;
         }
 
