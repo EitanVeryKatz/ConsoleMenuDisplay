@@ -7,7 +7,7 @@ namespace Ex04.Menus.Interfaces
     internal class MainMenu : IListener
     {
         private readonly Dictionary<string, MenuItem> r_MenuItems = new Dictionary<string, MenuItem>();
-        private readonly Stack<SubMenu> r_HistoryStack = new Stack<SubMenu>();
+        private readonly Stack r_HistoryStack = new Stack();
         public SubMenu CurrentMenu { get; private set; } = null;
         
 
@@ -47,7 +47,7 @@ namespace Ex04.Menus.Interfaces
                 {
                     if (r_HistoryStack.Count > 0)
                     {
-                        CurrentMenu = r_HistoryStack.Pop();
+                        CurrentMenu = (SubMenu)r_HistoryStack.Pop();
                         CurrentMenu.Show();
                     }
                     else
