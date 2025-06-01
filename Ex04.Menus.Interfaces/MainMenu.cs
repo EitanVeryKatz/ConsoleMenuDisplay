@@ -1,60 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Ex04.Menus.Interfaces
 {
-    internal class MainMenu : IListener
+    public class MainMenu : IListener
     {
-        private Stack<SubMenu> historyStack = new Stack<SubMenu>();
-        public SubMenu CurrentMenu { get; private set; } = null;
-        private List<MenuItem> m_MenuItems = new List<MenuItem>();
-        public MainMenu()
+        private readonly Stack r_HistoryStack = new Stack();
+        private bool m_isRunning = false;
+        private SubMenu CurrentMenu { get;  set; } = null;
+        private readonly SubMenu m_DefaultMenu;
+        private IListener m_Listener = null;
+
+
+        public MainMenu(string i_Title,IListener i_Listener)
         {
-            CurrentMenu = new SubMenu("Main Menu", this);
-            historyStack.Push(CurrentMenu);
-        }
-        public MainMenu(string i_Title)
-        {
+            m_Listener = i_Listener;
             CurrentMenu = new SubMenu(i_Title, this);
-            historyStack.Push(CurrentMenu);
+            CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
+            m_DefaultMenu = CurrentMenu; // Store the default menu
         }
 
         public void AddMenuItem(MenuItem i_MenuItem)
         {
-            m_MenuItems.Add(i_MenuItem);
+            CurrentMenu.AddItem(i_MenuItem);
         }
 
+
+        public void EnterSubMenu(string i_SubMenuName)
+        {
+            CurrentMenu.TryEnter(i_SubMenuName);
+        }
         public void Show()
         {
-            Console.WriteLine("Main Menu:");
-            foreach (MenuItem item in m_MenuItems)
+            m_isRunning = true;
+            while (m_isRunning)
             {
-                if (item is Item menuItem)
-                {
-                    Console.WriteLine(menuItem.Text);
-                }
-                else if (item is SubMenu subMenu)
-                {
-                    Console.WriteLine(subMenu.Name);
-                }
+                CurrentMenu.Show();
+                CurrentMenu.HandleInput();
             }
+            
         }
-
-        private void ItemChosen(MenuItem i_MenuItem)
+        
+        void IListener.ReportChosen(MenuItem i_MenuItem)
         {
-            if (i_MenuItem is Item item)
+            if (i_MenuItem is SubMenu subMenu)
             {
-                if (item.Name == "Exit")
+                r_HistoryStack.Push(CurrentMenu);
+                CurrentMenu = subMenu;
+            }
+            else
+            {
+                if (i_MenuItem.Name == "Exit")
                 {
                     Console.WriteLine("Exiting menu...");
-                    Environment.Exit(0);
+                    m_isRunning = false;
                 }
-                else if (item.Name == "Back")
+                else if (i_MenuItem.Name == "Back")
                 {
-                    if (historyStack.Count > 0)
+                    if (r_HistoryStack.Count > 0)
                     {
-                        CurrentMenu = historyStack.Pop();
-                        CurrentMenu.Show();
+                        CurrentMenu = (SubMenu)r_HistoryStack.Pop();
                     }
                     else
                     {
@@ -63,20 +69,16 @@ namespace Ex04.Menus.Interfaces
                 }
                 else
                 {
-                    item.Execute();
+                    Console.WriteLine("{0} chosen", i_MenuItem.Name);
+                    m_Listener.ReportChosen(i_MenuItem); // Call the function associated with the menu item, if it exists
                 }
-            }
-            else if (i_MenuItem is SubMenu subMenu)
-            {
-                historyStack.Push(CurrentMenu);
-                CurrentMenu = subMenu;
-                subMenu.Show();
             }
         }
 
-        public void NotifyChosen(string message)
+        public void ResetToDefaultMenu()
         {
-            Console.WriteLine($"Notification: {message}");
+            CurrentMenu = m_DefaultMenu;
+            r_HistoryStack.Clear();
         }
     }
 }

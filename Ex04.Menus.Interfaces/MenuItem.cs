@@ -2,12 +2,12 @@
 
 namespace Ex04.Menus.Interfaces
 {
-    internal class MenuItem
+    public class MenuItem
     {
         public string Name { get; private set; }
-        private IListener m_Listener;
-
-        internal MenuItem(string name, IListener listener = null)
+        protected IListener m_Listener;
+        
+        public MenuItem(string name, IListener listener = null)
         {
             Name = name;
             m_Listener = listener;
@@ -18,16 +18,12 @@ namespace Ex04.Menus.Interfaces
             m_Listener = listener;
         }
 
-        internal virtual void Show()
-        {
-            Console.WriteLine($"Menu Item: {Name}");
-        }
 
         internal void ReportChosen()
         {
             if (m_Listener != null)
             {
-                m_Listener.NotifyChosen(Name);
+                m_Listener.ReportChosen(this);
             }
             else
             {

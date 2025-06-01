@@ -4,36 +4,40 @@ using System.Linq;
 
 namespace Ex04.Menus.Interfaces
 {
-    internal class SubMenu : MenuItem, IListener
+    public class SubMenu : MenuItem
     {
-        private List<MenuItem> m_SubMenuItems = new List<MenuItem>();
-        public string Name { get; private set; }
-        public IListener Listener { get; private set; }
-        public SubMenu(string i_Name, IListener i_Listener) : base(i_Name)
+        private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
+        public SubMenu(string i_Name, IListener i_Listener) : base(i_Name, i_Listener)
         {
-            Name = i_Name;
-            Listener = i_Listener;
-        }
-        public void AddSubMenuItem(MenuItem i_MenuItem)
-        {
-            i_MenuItem.SetListener(this); // Set this submenu as the listener
-            m_SubMenuItems.Add(i_MenuItem);
+            r_MenuItems.Add(0, new MenuItem("Back", i_Listener)); // Add a "Back" option
         }
 
-        public override void Show()// Override the Show method to display submenu items
+        internal void SwitchBackToExit()
         {
-            Console.WriteLine($"Sub Menu: {Name}");
-            for (int i = 0; i < m_SubMenuItems.Count; i++)
+            r_MenuItems[0] = new MenuItem("Exit", m_Listener); // Change "Back" to "Exit"
+        }
+
+        internal void AddItem(MenuItem i_MenuItem)
+        {
+            r_MenuItems.Add(r_MenuItems.Count,i_MenuItem);
+        }
+
+        internal void Show()// Override the Show method to display submenu items
+        {
+            //add clear screen
+            Console.WriteLine("** {0} **",Name);
+            Console.WriteLine("******************");
+            foreach (KeyValuePair<int,MenuItem> item in r_MenuItems)
             {
-                Console.WriteLine($"{i + 1}. {m_SubMenuItems[i].Name}");
+                Console.WriteLine($"{item.Key}. {item.Value.Name}");
             }
+                
         }
 
         public void HandleInput()
         {
-            Show();// Display the submenu items
             string choice = getInput();
-            MenuItem selectedItem = m_SubMenuItems.FirstOrDefault(item => item.Name.Equals(choice, StringComparison.OrdinalIgnoreCase));// Find the selected item based on user input
+            MenuItem selectedItem = r_MenuItems[int.Parse(choice)];
             if (selectedItem != null)
             {
                 selectedItem.ReportChosen();// Notify the listener that an item has been chosen
@@ -49,17 +53,28 @@ namespace Ex04.Menus.Interfaces
                 Console.WriteLine("Input cannot be empty. Please try again.");
                 return getInput();
             }
-            if (!m_SubMenuItems.Any(item => item.Name.Equals(input, StringComparison.OrdinalIgnoreCase)))
+            if (!r_MenuItems.ContainsKey(int.Parse(input)))
             {
                 Console.WriteLine("Invalid choice. Please try again.");
                 return getInput();
             }
+
+            Console.Clear();
+
             return input;
         }
 
-        public void NotifyChosen(string message)
+        internal void TryEnter(string i_SubMenuName)
         {
-            Console.WriteLine($"You chose: {message} in submenu '{Name}'");
+            
+            foreach (MenuItem item in r_MenuItems.Values)
+            {
+                if (item is SubMenu subMenuToEnter && item.Name == i_SubMenuName)
+                {
+                    subMenuToEnter.ReportChosen();
+                    break;
+                }
+            }
         }
     }
 }
