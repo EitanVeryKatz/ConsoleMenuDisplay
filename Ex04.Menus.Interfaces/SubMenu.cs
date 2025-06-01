@@ -10,7 +10,7 @@ namespace Ex04.Menus.Interfaces
         public SubMenu(string i_Name, IListener i_Listener) : base(i_Name, i_Listener)
         {
         }
-        private void AddItem(MenuItem i_MenuItem)
+        internal void AddItem(MenuItem i_MenuItem)
         {
             r_MenuItems.Add(r_MenuItems.Count+1,i_MenuItem);
         }
@@ -53,5 +53,17 @@ namespace Ex04.Menus.Interfaces
             return input;
         }
 
+        internal void TryEnter(string i_SubMenuName)
+        {
+            
+            foreach (MenuItem item in r_MenuItems.Values)
+            {
+                if (item is SubMenu subMenuToEnter && item.Name == i_SubMenuName)
+                {
+                    subMenuToEnter.ReportChosen();
+                    break;
+                }
+            }
+        }
     }
 }

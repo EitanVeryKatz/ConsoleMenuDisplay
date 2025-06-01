@@ -38,7 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IListener.cs" />
-    <Compile Include="Item.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="SubMenu.cs" />

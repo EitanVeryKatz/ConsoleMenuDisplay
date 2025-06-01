@@ -6,7 +6,7 @@ namespace Ex04.Menus.Interfaces
     {
         public string Name { get; private set; }
         private IListener m_Listener;
-
+        
         internal MenuItem(string name, IListener listener = null)
         {
             Name = name;
