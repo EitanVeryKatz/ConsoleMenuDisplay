@@ -7,19 +7,23 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Events
 {
-    internal class MainMenu
+    public class MainMenu
     {
         private readonly Stack r_HistoryStack = new Stack();
         private bool m_isRunning = false;
         private SubMenu CurrentMenu { get; set; } = null;
         private readonly SubMenu m_DefaultMenu;
+        Action<MenuItem> NonSubMenuItemChosen;
 
         public MainMenu(string i_Title)
         {
-            CurrentMenu = new SubMenu(i_Title, this);
+            CurrentMenu = new SubMenu(i_Title);
+            CurrentMenu.Chosen += On_Chosen;
             CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
             m_DefaultMenu = CurrentMenu; // Store the default menu
         }
+
+        
 
         public void AddMenuItem(MenuItem i_MenuItem)
         {
@@ -43,7 +47,7 @@ namespace Ex04.Menus.Events
 
         }
 
-        void IListener.ReportChosen(MenuItem i_MenuItem)
+        void On_Chosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is SubMenu subMenu)
             {
@@ -71,9 +75,16 @@ namespace Ex04.Menus.Events
                 else
                 {
                     Console.WriteLine("{0} chosen", i_MenuItem.Name);
-                    m_Listener.ReportChosen(i_MenuItem); // Call the function associated with the menu item, if it exists
+                    NonSubMenuItemChosen.Invoke(i_MenuItem); // Call the function associated with the menu item, if it exists
                 }
             }
         }
+
+        public void ResetToDefaultMenu()
+        {
+            CurrentMenu = m_DefaultMenu;
+            r_HistoryStack.Clear();
+        }
     }
 }
+

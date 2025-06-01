@@ -39,6 +39,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Ex04.Menus.Events">
+      <HintPath>..\Ex04.Menus.Events\bin\Debug\Ex04.Menus.Events.dll</HintPath>
+    </Reference>
     <Reference Include="Ex04.Menus.Interfaces">
       <HintPath>..\Ex04.Menus.Interfaces\bin\Debug\Ex04.Menus.Interfaces.dll</HintPath>
     </Reference>

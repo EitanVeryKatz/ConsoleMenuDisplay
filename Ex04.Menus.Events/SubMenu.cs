@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Events
 {
-    internal class SubMenu:MenuItem
+    public class SubMenu:MenuItem
     {
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
         public SubMenu(string i_Name) : base(i_Name)
@@ -16,7 +16,7 @@ namespace Ex04.Menus.Events
 
         internal void SwitchBackToExit()
         {
-            r_MenuItems[0] = new MenuItem("Exit", m_Listener); // Change "Back" to "Exit"
+            r_MenuItems[0] = new MenuItem("Exit"); // Change "Back" to "Exit"
         }
 
         internal void AddItem(MenuItem i_MenuItem)
@@ -42,7 +42,7 @@ namespace Ex04.Menus.Events
             MenuItem selectedItem = r_MenuItems[int.Parse(choice)];
             if (selectedItem != null)
             {
-                selectedItem.ReportChosen();// Notify the listener that an item has been chosen
+                OnChosen(this);// Notify the listener that an item has been chosen
             }
         }
 
@@ -73,7 +73,7 @@ namespace Ex04.Menus.Events
             {
                 if (item is SubMenu subMenuToEnter && item.Name == i_SubMenuName)
                 {
-                    subMenuToEnter.ReportChosen();
+                    OnChosen(subMenuToEnter);
                     break;
                 }
             }

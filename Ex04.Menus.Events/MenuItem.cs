@@ -6,28 +6,23 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Events
 {
-    internal class MenuItem
+    public class MenuItem
     {
         public string Name { get; private set; }
-
-  
 
         public MenuItem(string name)
         {
             Name = name;
         }
 
+        public event Action<MenuItem> Chosen;
 
-        internal void ReportChosen()
+        protected void OnChosen(MenuItem item)
         {
-            if (m_Listener != null)
-            {
-                m_Listener.ReportChosen(this);
-            }
-            else
-            {
-                Console.WriteLine($"Menu item '{Name}' has been chosen, but no listener is registered.");
-            }
+            Chosen?.Invoke(this);
         }
+
+
+        
     }
 }
