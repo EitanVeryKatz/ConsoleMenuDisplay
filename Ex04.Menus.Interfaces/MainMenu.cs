@@ -10,14 +10,12 @@ namespace Ex04.Menus.Interfaces
         private bool m_isRunning = false;
         private SubMenu CurrentMenu { get;  set; } = null;
         private readonly SubMenu m_DefaultMenu;
-        
+        private IListener m_Listener = null;
 
-        public MainMenu():this("Main Menu")
-        {
-        }
 
-        public MainMenu(string i_Title)
+        public MainMenu(string i_Title,IListener i_Listener)
         {
+            m_Listener = i_Listener;
             CurrentMenu = new SubMenu(i_Title, this);
             CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
             m_DefaultMenu = CurrentMenu; // Store the default menu
@@ -72,6 +70,7 @@ namespace Ex04.Menus.Interfaces
                 else
                 {
                     Console.WriteLine("{0} chosen", i_MenuItem.Name);
+                    m_Listener.ReportChosen(i_MenuItem); // Call the function associated with the menu item, if it exists
                 }
             }
         }

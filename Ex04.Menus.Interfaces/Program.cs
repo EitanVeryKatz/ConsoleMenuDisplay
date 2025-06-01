@@ -21,7 +21,7 @@ namespace Ex04.Menus.Interfaces
             mainMenu.AddMenuItem(subMenu1);
             mainMenu.AddMenuItem(subMenu2);
             mainMenu.EnterSubMenu("Sub Menu 1");
-            mainMenu.AddMenuItem(item1);
+            mainMenu.AddMenuItem(item1,someclass);
             mainMenu.AddMenuItem(item2);
             mainMenu.ResetToDefaultMenu();
             mainMenu.EnterSubMenu("Sub Menu 2");
