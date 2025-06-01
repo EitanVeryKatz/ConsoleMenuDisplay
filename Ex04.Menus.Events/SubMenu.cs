@@ -42,7 +42,7 @@ namespace Ex04.Menus.Events
             MenuItem selectedItem = r_MenuItems[int.Parse(choice)];
             if (selectedItem != null)
             {
-                OnChosen(this);// Notify the listener that an item has been chosen
+                OnChosen(selectedItem);// Notify the listener that an item has been chosen
             }
         }
 

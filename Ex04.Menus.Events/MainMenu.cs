@@ -28,6 +28,7 @@ namespace Ex04.Menus.Events
         public void AddMenuItem(MenuItem i_MenuItem)
         {
             CurrentMenu.AddItem(i_MenuItem);
+            i_MenuItem.Chosen += On_Chosen;
         }
 
 

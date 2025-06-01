@@ -49,7 +49,7 @@ namespace Ex04.Menus.Test
             mainMenu.ResetToDefaultMenu();
             mainMenu.Show();
 
-
+            //bugs in navigation not navigating
         }
     }
 }

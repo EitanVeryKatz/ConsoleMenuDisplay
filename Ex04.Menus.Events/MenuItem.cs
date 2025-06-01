@@ -19,7 +19,7 @@ namespace Ex04.Menus.Events
 
         protected void OnChosen(MenuItem item)
         {
-            Chosen?.Invoke(this);
+            Chosen?.Invoke(item);
         }
 
 
