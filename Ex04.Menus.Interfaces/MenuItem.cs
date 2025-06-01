@@ -18,16 +18,12 @@ namespace Ex04.Menus.Interfaces
             m_Listener = listener;
         }
 
-        internal virtual void Show()
-        {
-            Console.WriteLine($"Menu Item: {Name}");
-        }
 
         internal void ReportChosen()
         {
             if (m_Listener != null)
             {
-                m_Listener.NotifyChosen(Name);
+                m_Listener.ReportChosen(this);
             }
             else
             {

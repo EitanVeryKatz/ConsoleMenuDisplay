@@ -1,46 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Ex04.Menus.Interfaces
 {
     internal class MainMenu : IListener
     {
-        private Stack<SubMenu> historyStack = new Stack<SubMenu>();
+        private readonly Dictionary<string, MenuItem> r_MenuItems = new Dictionary<string, MenuItem>();
+        private readonly Stack<SubMenu> r_HistoryStack = new Stack<SubMenu>();
         public SubMenu CurrentMenu { get; private set; } = null;
-        private List<MenuItem> m_MenuItems = new List<MenuItem>();
+        
+
         public MainMenu()
         {
             CurrentMenu = new SubMenu("Main Menu", this);
-            historyStack.Push(CurrentMenu);
+            r_HistoryStack.Push(CurrentMenu);
         }
+
         public MainMenu(string i_Title)
         {
             CurrentMenu = new SubMenu(i_Title, this);
-            historyStack.Push(CurrentMenu);
+            r_HistoryStack.Push(CurrentMenu);
         }
 
         public void AddMenuItem(MenuItem i_MenuItem)
         {
-            m_MenuItems.Add(i_MenuItem);
+            r_MenuItems.Add(i_MenuItem.Name, i_MenuItem);//add set
         }
 
         public void Show()
         {
-            Console.WriteLine("Main Menu:");
-            foreach (MenuItem item in m_MenuItems)
-            {
-                if (item is Item menuItem)
-                {
-                    Console.WriteLine(menuItem.Text);
-                }
-                else if (item is SubMenu subMenu)
-                {
-                    Console.WriteLine(subMenu.Name);
-                }
-            }
+            CurrentMenu.Show();
+            CurrentMenu.HandleInput();
         }
-
-        private void ItemChosen(MenuItem i_MenuItem)
+        
+        void IListener.ReportChosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is Item item)
             {
@@ -51,9 +45,9 @@ namespace Ex04.Menus.Interfaces
                 }
                 else if (item.Name == "Back")
                 {
-                    if (historyStack.Count > 0)
+                    if (r_HistoryStack.Count > 0)
                     {
-                        CurrentMenu = historyStack.Pop();
+                        CurrentMenu = r_HistoryStack.Pop();
                         CurrentMenu.Show();
                     }
                     else
@@ -63,20 +57,17 @@ namespace Ex04.Menus.Interfaces
                 }
                 else
                 {
-                    item.Execute();
+                    item.ReportChosen();
                 }
             }
             else if (i_MenuItem is SubMenu subMenu)
             {
-                historyStack.Push(CurrentMenu);
+                r_HistoryStack.Push(CurrentMenu);
                 CurrentMenu = subMenu;
                 subMenu.Show();
             }
         }
 
-        public void NotifyChosen(string message)
-        {
-            Console.WriteLine($"Notification: {message}");
-        }
+        
     }
 }

@@ -8,6 +8,6 @@ namespace Ex04.Menus.Interfaces
 {
     internal interface IListener
     {
-        void NotifyChosen(string message);
+        void ReportChosen(MenuItem i_menuItem);
     }
 }
