@@ -6,10 +6,9 @@ namespace Ex04.Menus.Interfaces
 {
     internal class MainMenu : IListener
     {
-        private readonly Dictionary<string, MenuItem> r_MenuItems = new Dictionary<string, MenuItem>();
         private readonly Stack r_HistoryStack = new Stack();
         private bool m_isRunning = false;
-        public SubMenu CurrentMenu { get; private set; } = null;
+        private SubMenu CurrentMenu { get;  set; } = null;
         private readonly SubMenu m_DefaultMenu;
         
 
@@ -20,12 +19,12 @@ namespace Ex04.Menus.Interfaces
         public MainMenu(string i_Title)
         {
             CurrentMenu = new SubMenu(i_Title, this);
+            CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
             m_DefaultMenu = CurrentMenu; // Store the default menu
         }
 
         public void AddMenuItem(MenuItem i_MenuItem)
         {
-            r_MenuItems.Add(i_MenuItem.Name, i_MenuItem);//add set
             CurrentMenu.AddItem(i_MenuItem);
         }
 
@@ -37,8 +36,12 @@ namespace Ex04.Menus.Interfaces
         public void Show()
         {
             m_isRunning = true;
-            CurrentMenu.Show();
-            CurrentMenu.HandleInput();
+            while (m_isRunning)
+            {
+                CurrentMenu.Show();
+                CurrentMenu.HandleInput();
+            }
+            
         }
         
         void IListener.ReportChosen(MenuItem i_MenuItem)
@@ -47,10 +50,6 @@ namespace Ex04.Menus.Interfaces
             {
                 r_HistoryStack.Push(CurrentMenu);
                 CurrentMenu = subMenu;
-                if (m_isRunning)
-                {
-                    subMenu.Show();
-                }
             }
             else
             {
@@ -64,7 +63,6 @@ namespace Ex04.Menus.Interfaces
                     if (r_HistoryStack.Count > 0)
                     {
                         CurrentMenu = (SubMenu)r_HistoryStack.Pop();
-                        CurrentMenu.Show();
                     }
                     else
                     {
@@ -73,7 +71,7 @@ namespace Ex04.Menus.Interfaces
                 }
                 else
                 {
-                    i_MenuItem.ReportChosen();
+                    Console.WriteLine("{0} chosen", i_MenuItem.Name);
                 }
             }
         }

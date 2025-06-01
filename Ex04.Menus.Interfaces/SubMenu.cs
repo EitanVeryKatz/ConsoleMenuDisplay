@@ -9,16 +9,24 @@ namespace Ex04.Menus.Interfaces
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
         public SubMenu(string i_Name, IListener i_Listener) : base(i_Name, i_Listener)
         {
+            r_MenuItems.Add(0, new MenuItem("Back", i_Listener)); // Add a "Back" option
         }
+
+        internal void SwitchBackToExit()
+        {
+            r_MenuItems[0] = new MenuItem("Exit", m_Listener); // Change "Back" to "Exit"
+        }
+
         internal void AddItem(MenuItem i_MenuItem)
         {
-            r_MenuItems.Add(r_MenuItems.Count+1,i_MenuItem);
+            r_MenuItems.Add(r_MenuItems.Count,i_MenuItem);
         }
 
         internal void Show()// Override the Show method to display submenu items
         {
             //add clear screen
-            Console.WriteLine($"Sub Menu: {Name}");
+            Console.WriteLine("** {0} **",Name);
+            Console.WriteLine("******************");
             foreach (KeyValuePair<int,MenuItem> item in r_MenuItems)
             {
                 Console.WriteLine($"{item.Key}. {item.Value.Name}");
