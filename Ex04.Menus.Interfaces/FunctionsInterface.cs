@@ -13,22 +13,31 @@ namespace Ex04.Menus.Interfaces
         private readonly List<MenuItem> r_MenuItems = new List<MenuItem>();
         void IListener.ReportChosen(MenuItem i_MenuItem)
         {
-            if(i_MenuItem.Name == "Item 1")
+            if(i_MenuItem.Name == "Show Version")
             {
-                Console.WriteLine("Item 1 execution");
+                Console.WriteLine("Version 1.0.0"); // Example version output
                 Thread.Sleep(1000); // Simulate some processing time
             }
-            else if (i_MenuItem.Name == "Item 2")
+            else if (i_MenuItem.Name == "Count Lowercase Letters")
             {
-                Console.WriteLine("Item 2 execution");
+                Console.WriteLine("Counting lowercase letters in a sample string...");
                 Thread.Sleep(1000); // Simulate some processing time
 
             }
-            else if (i_MenuItem.Name == "Item 3")
+            else if (i_MenuItem.Name == "Show Current Date")
             {
-                Console.WriteLine("Item 3 execution");
+                Console.WriteLine($"Current Date: {DateTime.Now.ToShortDateString()}");
                 Thread.Sleep(1000); // Simulate some processing time
 
+            }
+            else if (i_MenuItem.Name == "Show Current Time")
+            {
+                Console.WriteLine($"Current Time: {DateTime.Now.ToShortTimeString()}");
+                Thread.Sleep(1000); // Simulate some processing time
+            }
+            else
+            {
+                Console.WriteLine($"Menu item '{i_MenuItem.Name}' has been chosen, but no action is defined for it.");
             }
         }
     }

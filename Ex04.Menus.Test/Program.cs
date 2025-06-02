@@ -37,15 +37,16 @@ namespace Ex04.Menus.Test
         {
             Console.WriteLine("Testing Interfaces Menu System...");
             FunctionsInterface functions = new FunctionsInterface();
-            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu("Main Menu", functions); // Fixed ambiguity
-            mainMenu.AddSubMenu("Sub Menu 1");
-            mainMenu.AddSubMenu("Sub Menu 2");
-            mainMenu.EnterSubMenu("Sub Menu 1");
-            mainMenu.AddMenuItem("Item 1");
-            mainMenu.AddMenuItem("Item 2");
+            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu("Delegates Main Menu", functions);//main menu
+            mainMenu.AddSubMenu("Letters and Version");//submenu1
+            mainMenu.AddSubMenu("Show Current Date/Time");//submenu2
+            mainMenu.EnterSubMenu("Letters and Version");
+            mainMenu.AddMenuItem("Show Version");
+            mainMenu.AddMenuItem("Count Lowercase Letters");
             mainMenu.ResetToDefaultMenu();
-            mainMenu.EnterSubMenu("Sub Menu 2");
-            mainMenu.AddMenuItem("Item 3");
+            mainMenu.EnterSubMenu("Show Current Date/Time");
+            mainMenu.AddMenuItem("Show Current Date");
+            mainMenu.AddMenuItem("Show Current Time");
             mainMenu.ResetToDefaultMenu();
             mainMenu.Show();
         }
@@ -53,15 +54,16 @@ namespace Ex04.Menus.Test
         {
             FunctionsEvents functions = new FunctionsEvents();
             Console.WriteLine("Testing Events Menu System...");
-            Events.MainMenu mainMenu = new Events.MainMenu("Main Menu", functions);
-            mainMenu.AddSubMenu("Sub Menu 1");
-            mainMenu.AddSubMenu("Sub Menu 2");
-            mainMenu.EnterSubMenu("Sub Menu 1");
-            mainMenu.AddMenuItem("Item 1");
-            mainMenu.AddMenuItem("Item 2");
+            Events.MainMenu mainMenu = new Events.MainMenu("Delegates Main Menu", functions);//main menu
+            mainMenu.AddSubMenu("Letters and Version");//submenu1
+            mainMenu.AddSubMenu("Show Current Date/Time");//submenu2
+            mainMenu.EnterSubMenu("Letters and Version");
+            mainMenu.AddMenuItem("Show Version");
+            mainMenu.AddMenuItem("Count Lowercase Letters");
             mainMenu.ResetToDefaultMenu();
-            mainMenu.EnterSubMenu("Sub Menu 2");
-            mainMenu.AddMenuItem("Item 3");
+            mainMenu.EnterSubMenu("Show Current Date/Time");
+            mainMenu.AddMenuItem("Show Current Date");
+            mainMenu.AddMenuItem("Show Current Time");
             mainMenu.ResetToDefaultMenu();
             mainMenu.Show();
         }
