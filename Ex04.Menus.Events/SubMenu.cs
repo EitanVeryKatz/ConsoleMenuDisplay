@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Ex04.Menus.Events
 {
-    public class SubMenu:MenuItem
+    public class SubMenu : MenuItem
     {
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
         public SubMenu(string i_Name) : base(i_Name)

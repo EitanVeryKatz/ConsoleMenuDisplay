@@ -66,6 +66,6 @@ namespace Ex04.Menus.Test
             mainMenu.AddMenuItem("Show Current Time");
             mainMenu.ResetToDefaultMenu();
             mainMenu.Show();
-        }
+        })
     }
 }

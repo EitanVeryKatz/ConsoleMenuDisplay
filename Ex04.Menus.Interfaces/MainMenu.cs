@@ -9,12 +9,11 @@ namespace Ex04.Menus.Interfaces
     {
         private readonly Stack r_HistoryStack = new Stack();
         private bool m_isRunning = false;
-        private SubMenu CurrentMenu { get;  set; } = null;
+        private SubMenu CurrentMenu { get; set; } = null;
         private readonly SubMenu m_DefaultMenu;
         private IListener m_Listener = null;
 
-
-        public MainMenu(string i_Title,IListener i_Listener)
+        public MainMenu(string i_Title, IListener i_Listener)
         {
             m_Listener = i_Listener;
             CurrentMenu = new SubMenu(i_Title, this);
@@ -24,22 +23,20 @@ namespace Ex04.Menus.Interfaces
 
         public void AddMenuItem(MenuItem i_MenuItem)
         {
-            CurrentMenu.AddItem(i_MenuItem);
+            CurrentMenu.AddMenuItem(i_MenuItem);
         }
-
 
         public void AddMenuItem(string i_Name) //add menu item while creating one
         {
             MenuItem menuItem = new MenuItem(i_Name, m_Listener); // Use the Functions listener
-            CurrentMenu.AddItem(menuItem);
+            CurrentMenu.AddMenuItem(menuItem);
         }
 
         public void AddSubMenu(string i_Name)
         {
             SubMenu subMenu = new SubMenu(i_Name, this);
-            CurrentMenu.AddItem(subMenu);
+            CurrentMenu.AddMenuItem(subMenu);
         }
-
 
         public void EnterSubMenu(string i_SubMenuName)
         {
@@ -55,9 +52,8 @@ namespace Ex04.Menus.Interfaces
                 CurrentMenu.Show();
                 CurrentMenu.HandleInput();
             }
-            
         }
-        
+
         void IListener.ReportChosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is SubMenu subMenu)
