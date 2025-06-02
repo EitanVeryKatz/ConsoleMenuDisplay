@@ -16,25 +16,25 @@ namespace Ex04.Menus.Events
         {
             if (i_MenuItem.Name == "Show Version")
             {
-                Console.WriteLine("Version 1.0.0"); // Example version output
-                Thread.Sleep(1000); // Simulate some processing time
+                Console.WriteLine("Version 1.0.0");
+                Thread.Sleep(1000);
             }
             else if (i_MenuItem.Name == "Count Lowercase Letters")
             {
                 Console.WriteLine("Counting lowercase letters in a sample string...");
-                Thread.Sleep(1000); // Simulate some processing time
+                Thread.Sleep(1000);
 
             }
             else if (i_MenuItem.Name == "Show Current Date")
             {
                 Console.WriteLine($"Current Date: {DateTime.Now.ToShortDateString()}");
-                Thread.Sleep(1000); // Simulate some processing time
+                Thread.Sleep(1000);
 
             }
             else if (i_MenuItem.Name == "Show Current Time")
             {
                 Console.WriteLine($"Current Time: {DateTime.Now.ToShortTimeString()}");
-                Thread.Sleep(1000); // Simulate some processing time
+                Thread.Sleep(1000);
             }
             else
             {
@@ -42,7 +42,6 @@ namespace Ex04.Menus.Events
             }
         }
 
-        //Expose an Action that can be invoked
         public Action<MenuItem> GetAction()
         {
             return ReportChosen;

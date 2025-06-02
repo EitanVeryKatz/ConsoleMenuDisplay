@@ -38,14 +38,14 @@ namespace Ex04.Menus.Events
             {
                 if (item.Key == 0 && r_MenuItems.Count > 1)
                 {
-                    continue; // Skip the "Back" or "Exit" option for now
+                    continue;
                 }
 
                 Console.WriteLine($"{item.Key}. {item.Value.Name}");
             }
             if (r_MenuItems.Count > 1)
             {
-                Console.WriteLine("0. {0}", r_MenuItems[0].Name); // Print "Back" or "Exit" option last
+                Console.WriteLine("0. {0}", r_MenuItems[0].Name);
             }
 
         }
@@ -56,7 +56,7 @@ namespace Ex04.Menus.Events
             MenuItem selectedItem = r_MenuItems[int.Parse(choice)];
             if (selectedItem != null)
             {
-                OnChosen(selectedItem);// Notify the listener that an item has been chosen
+                OnChosen(selectedItem);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Ex04.Menus.Events
                 Console.WriteLine("Invalid choice. Please try again.");
                 return getInput();
             }
-            Ex02.ConsoleUtils.Screen.Clear(); // Clear the screen after input
+            Ex02.ConsoleUtils.Screen.Clear();
 
             return input;
         }

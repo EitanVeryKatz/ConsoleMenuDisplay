@@ -17,7 +17,7 @@ namespace Ex04.Menus.Events
 
         public event Action<MenuItem> Chosen;
 
-        protected void OnChosen(MenuItem item)// Notify subscribers that this item has been chosen
+        protected void OnChosen(MenuItem item)
         {
             Chosen?.Invoke(item);
         }

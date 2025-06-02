@@ -20,8 +20,8 @@ namespace Ex04.Menus.Events
         {
             CurrentMenu = new SubMenu(i_Title);
             CurrentMenu.Chosen += On_Chosen;
-            CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
-            m_DefaultMenu = CurrentMenu; // Store the default menu
+            CurrentMenu.SwitchBackToExit();
+            m_DefaultMenu = CurrentMenu;
             if (functions?.GetAction() != null)
             {
                 NonSubMenuItemChosen = functions.GetAction();
@@ -38,17 +38,17 @@ namespace Ex04.Menus.Events
             i_MenuItem.Chosen += On_Chosen;
         }
 
-        public void AddMenuItem(string i_Name) //add menu item while creating one
+        public void AddMenuItem(string i_Name)
         {
-            MenuItem menuItem = new MenuItem(i_Name); // Create a new MenuItem
-            menuItem.Chosen += On_Chosen; // Subscribe to the Chosen event
-            CurrentMenu.AddMenuItem(menuItem); // Add it to the current menu
+            MenuItem menuItem = new MenuItem(i_Name);
+            menuItem.Chosen += On_Chosen;
+            CurrentMenu.AddMenuItem(menuItem);
         }
 
         public void AddSubMenu(string i_Name)
         {
             SubMenu subMenu = new SubMenu(i_Name);
-            subMenu.Chosen += On_Chosen; // Subscribe to the Chosen event
+            subMenu.Chosen += On_Chosen;
             CurrentMenu.AddMenuItem(subMenu);
         }
 
@@ -59,7 +59,7 @@ namespace Ex04.Menus.Events
 
         public void Show()
         {
-            Ex02.ConsoleUtils.Screen.Clear(); //from guy ronen dll
+            Ex02.ConsoleUtils.Screen.Clear();
             m_isRunning = true;
             while (m_isRunning)
             {

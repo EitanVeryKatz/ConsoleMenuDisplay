@@ -17,8 +17,8 @@ namespace Ex04.Menus.Interfaces
         {
             m_Listener = i_Listener;
             CurrentMenu = new SubMenu(i_Title, this);
-            CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
-            m_DefaultMenu = CurrentMenu; // Store the default menu
+            CurrentMenu.SwitchBackToExit();
+            m_DefaultMenu = CurrentMenu;
         }
 
         public void AddMenuItem(MenuItem i_MenuItem)
@@ -26,9 +26,9 @@ namespace Ex04.Menus.Interfaces
             CurrentMenu.AddMenuItem(i_MenuItem);
         }
 
-        public void AddMenuItem(string i_Name) //add menu item while creating one
+        public void AddMenuItem(string i_Name)
         {
-            MenuItem menuItem = new MenuItem(i_Name, m_Listener); // Use the Functions listener
+            MenuItem menuItem = new MenuItem(i_Name, m_Listener);
             CurrentMenu.AddMenuItem(menuItem);
         }
 
@@ -45,7 +45,7 @@ namespace Ex04.Menus.Interfaces
 
         public void Show()
         {
-            Ex02.ConsoleUtils.Screen.Clear();//from guy ronen dll
+            Ex02.ConsoleUtils.Screen.Clear();
             m_isRunning = true;
             while (m_isRunning)
             {

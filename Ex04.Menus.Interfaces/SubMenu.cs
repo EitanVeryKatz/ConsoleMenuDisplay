@@ -11,12 +11,12 @@ namespace Ex04.Menus.Interfaces
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
         public SubMenu(string i_Name, IListener i_Listener) : base(i_Name, i_Listener)
         {
-            r_MenuItems.Add(0, new MenuItem("Back", i_Listener)); // Add a "Back" option
+            r_MenuItems.Add(0, new MenuItem("Back", i_Listener));
         }
 
         internal void SwitchBackToExit()
         {
-            r_MenuItems[0] = new MenuItem("Exit", m_Listener); // Change "Back" to "Exit"
+            r_MenuItems[0] = new MenuItem("Exit", m_Listener);
         }
 
         internal void AddMenuItem(MenuItem i_MenuItem)
@@ -24,23 +24,23 @@ namespace Ex04.Menus.Interfaces
             r_MenuItems.Add(r_MenuItems.Count, i_MenuItem);
         }
 
-        internal void Show()// Override the Show method to display submenu items
+        internal void Show()
         {
-            Ex02.ConsoleUtils.Screen.Clear(); //from guy ronen dll
+            Ex02.ConsoleUtils.Screen.Clear();
             Console.WriteLine("** {0} **", Name);
             Console.WriteLine("******************");
             foreach (KeyValuePair<int, MenuItem> item in r_MenuItems)
             {
                 if (item.Key == 0 && r_MenuItems.Count > 1)
                 {
-                    continue; // Skip the "Back" or "Exit" option for now
+                    continue;
                 }
 
                 Console.WriteLine($"{item.Key}. {item.Value.Name}");
             }
             if (r_MenuItems.Count > 1)
             {
-                Console.WriteLine("0. {0}", r_MenuItems[0].Name); // Print "Back" or "Exit" option last
+                Console.WriteLine("0. {0}", r_MenuItems[0].Name);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Ex04.Menus.Interfaces
             MenuItem selectedItem = r_MenuItems[int.Parse(choice)];
             if (selectedItem != null)
             {
-                selectedItem.ReportChosen();// Notify the listener that an item has been chosen
+                selectedItem.ReportChosen();
             }
         }
 
