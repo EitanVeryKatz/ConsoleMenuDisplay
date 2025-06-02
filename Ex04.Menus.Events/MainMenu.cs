@@ -16,17 +16,23 @@ namespace Ex04.Menus.Events
         private readonly SubMenu m_DefaultMenu;
         Action<MenuItem> NonSubMenuItemChosen;
 
-        public MainMenu(string i_Title)
+        public MainMenu(string i_Title, FunctionsEvents functions)
         {
             CurrentMenu = new SubMenu(i_Title);
             CurrentMenu.Chosen += On_Chosen;
             CurrentMenu.SwitchBackToExit(); // Change "Back" to "Exit" in the default menu
             m_DefaultMenu = CurrentMenu; // Store the default menu
+            if (functions?.GetAction() != null)
+            {
+                NonSubMenuItemChosen = functions.GetAction();
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(functions), "FunctionsEvents instance cannot be null or must provide a valid action.");
+            }
         }
 
-        
-
-        public void AddMenuItem(MenuItem i_MenuItem) 
+        public void AddMenuItem(MenuItem i_MenuItem)
         {
             CurrentMenu.AddMenuItem(i_MenuItem);
             i_MenuItem.Chosen += On_Chosen;
@@ -46,7 +52,6 @@ namespace Ex04.Menus.Events
             CurrentMenu.AddMenuItem(subMenu);
         }
 
-
         public void EnterSubMenu(string i_SubMenuName)
         {
             CurrentMenu.TryEnter(i_SubMenuName);
@@ -61,7 +66,6 @@ namespace Ex04.Menus.Events
                 CurrentMenu.Show();
                 CurrentMenu.HandleInput();
             }
-
         }
 
         void On_Chosen(MenuItem i_MenuItem)
@@ -91,7 +95,6 @@ namespace Ex04.Menus.Events
                 }
                 else
                 {
-                    Console.WriteLine("{0} chosen", i_MenuItem.Name);
                     NonSubMenuItemChosen.Invoke(i_MenuItem);
                 }
             }

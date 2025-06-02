@@ -48,7 +48,14 @@ namespace Ex04.Menus.Interfaces
 
         private string getInput()
         {
-            Console.WriteLine("Please choose an option:");
+            if (r_MenuItems[0].Name == "Exit")
+            {
+                Console.WriteLine("Please enter your choice (1-{0} or 0 to exit):", r_MenuItems.Count - 1);
+            }
+            else
+            {
+                Console.WriteLine("Please enter your choice (1-{0} or 0 to go back):", r_MenuItems.Count - 1);
+            }
             string input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
             {

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class Functions : IListener
+    public class FunctionsInterface : IListener
     {
         private readonly List<MenuItem> r_MenuItems = new List<MenuItem>();
         void IListener.ReportChosen(MenuItem i_MenuItem)

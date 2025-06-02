@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ex04.Menus;
 using Ex04.Menus.Interfaces;
+using Ex04.Menus.Events;
 
 namespace Ex04.Menus.Test
 {
@@ -35,8 +36,8 @@ namespace Ex04.Menus.Test
         public static void testInterfaces()
         {
             Console.WriteLine("Testing Interfaces Menu System...");
-            Functions functions = new Functions();
-            MainMenu mainMenu = new MainMenu("Main Menu", functions);
+            FunctionsInterface functions = new FunctionsInterface();
+            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu("Main Menu", functions); // Fixed ambiguity
             mainMenu.AddSubMenu("Sub Menu 1");
             mainMenu.AddSubMenu("Sub Menu 2");
             mainMenu.EnterSubMenu("Sub Menu 1");
@@ -50,8 +51,9 @@ namespace Ex04.Menus.Test
         }
         public static void testEvents()
         {
+            FunctionsEvents functions = new FunctionsEvents();
             Console.WriteLine("Testing Events Menu System...");
-            Events.MainMenu mainMenu = new Events.MainMenu("Main Menu");
+            Events.MainMenu mainMenu = new Events.MainMenu("Main Menu", functions);
             mainMenu.AddSubMenu("Sub Menu 1");
             mainMenu.AddSubMenu("Sub Menu 2");
             mainMenu.EnterSubMenu("Sub Menu 1");

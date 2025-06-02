@@ -40,7 +40,7 @@
     <None Include="MenusTestClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functions.cs" />
+    <Compile Include="FunctionsInterface.cs" />
     <Compile Include="IListener.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuItem.cs" />
