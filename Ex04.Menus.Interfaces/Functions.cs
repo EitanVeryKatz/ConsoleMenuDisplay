@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Ex04.Menus.Interfaces
 {
@@ -15,14 +16,19 @@ namespace Ex04.Menus.Interfaces
             if(i_MenuItem.Name == "Item 1")
             {
                 Console.WriteLine("Item 1 execution");
+                Thread.Sleep(1000); // Simulate some processing time
             }
             else if (i_MenuItem.Name == "Item 2")
             {
                 Console.WriteLine("Item 2 execution");
+                Thread.Sleep(1000); // Simulate some processing time
+
             }
             else if (i_MenuItem.Name == "Item 3")
             {
                 Console.WriteLine("Item 3 execution");
+                Thread.Sleep(1000); // Simulate some processing time
+
             }
         }
     }

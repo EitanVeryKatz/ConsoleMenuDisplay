@@ -30,7 +30,7 @@ namespace Ex04.Menus.Interfaces
 
         public void AddMenuItem(string i_Name) //add menu item while creating one
         {
-            MenuItem menuItem = new MenuItem(i_Name, this);
+            MenuItem menuItem = new MenuItem(i_Name, m_Listener); // Use the Functions listener
             CurrentMenu.AddItem(menuItem);
         }
 
@@ -86,7 +86,7 @@ namespace Ex04.Menus.Interfaces
                 else
                 {
                     Console.WriteLine("{0} chosen", i_MenuItem.Name);
-                    m_Listener.ReportChosen(i_MenuItem); // Call the function associated with the menu item, if it exists
+                    m_Listener.ReportChosen(i_MenuItem);
                 }
             }
         }

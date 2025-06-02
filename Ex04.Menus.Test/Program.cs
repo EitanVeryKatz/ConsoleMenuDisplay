@@ -12,7 +12,8 @@ namespace Ex04.Menus.Test
     {
         public static void Main()
         {
-            MainMenu mainMenu = new MainMenu("Main Menu", new Functions());
+            Functions functions = new Functions();
+            MainMenu mainMenu = new MainMenu("Main Menu", functions);
             //MainMenu mainMenu = new MainMenu();
 
             //SubMenu subMenu1 = new SubMenu("Sub Menu 1", mainMenu);
@@ -24,11 +25,11 @@ namespace Ex04.Menus.Test
             mainMenu.AddSubMenu("Sub Menu 1");
             mainMenu.AddSubMenu("Sub Menu 2");
             mainMenu.EnterSubMenu("Sub Menu 1");
-            mainMenu.AddMenuItem("item 1");
-            mainMenu.AddMenuItem("item 2");
+            mainMenu.AddMenuItem("Item 1");
+            mainMenu.AddMenuItem("Item 2");
             mainMenu.ResetToDefaultMenu();
             mainMenu.EnterSubMenu("Sub Menu 2");
-            mainMenu.AddMenuItem("item 3");
+            mainMenu.AddMenuItem("Item 3");
             mainMenu.ResetToDefaultMenu();
             mainMenu.Show();
 
