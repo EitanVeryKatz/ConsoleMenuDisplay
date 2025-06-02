@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Ex04.Menus.Events
 {
     public class SubMenu:MenuItem
@@ -19,14 +18,20 @@ namespace Ex04.Menus.Events
             r_MenuItems[0] = new MenuItem("Exit"); // Change "Back" to "Exit"
         }
 
-        internal void AddItem(MenuItem i_MenuItem)
+        internal void AddMenuItem(MenuItem i_MenuItem)
         {
             r_MenuItems.Add(r_MenuItems.Count, i_MenuItem);
         }
 
+        internal void AddMenuItem(string i_Name)
+        {
+            MenuItem menuItem = new MenuItem(i_Name); // Create a new MenuItem
+            r_MenuItems.Add(r_MenuItems.Count, menuItem); // Add it to the dictionary
+        }
+
         internal void Show()// Override the Show method to display submenu items
         {
-            //add clear screen
+            Ex02.ConsoleUtils.Screen.Clear(); //from guy ronen dll
             Console.WriteLine("** {0} **", Name);
             Console.WriteLine("******************");
             foreach (KeyValuePair<int, MenuItem> item in r_MenuItems)
@@ -60,8 +65,7 @@ namespace Ex04.Menus.Events
                 Console.WriteLine("Invalid choice. Please try again.");
                 return getInput();
             }
-
-            Console.Clear();
+            Ex02.ConsoleUtils.Screen.Clear(); // Clear the screen after input
 
             return input;
         }

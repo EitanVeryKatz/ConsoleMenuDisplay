@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex02.ConsoleUtils;
 
 namespace Ex04.Menus.Events
 {
@@ -27,8 +28,22 @@ namespace Ex04.Menus.Events
 
         public void AddMenuItem(MenuItem i_MenuItem) 
         {
-            CurrentMenu.AddItem(i_MenuItem);
+            CurrentMenu.AddMenuItem(i_MenuItem);
             i_MenuItem.Chosen += On_Chosen;
+        }
+
+        public void AddMenuItem(string i_Name) //add menu item while creating one
+        {
+            MenuItem menuItem = new MenuItem(i_Name); // Create a new MenuItem
+            menuItem.Chosen += On_Chosen; // Subscribe to the Chosen event
+            CurrentMenu.AddMenuItem(menuItem); // Add it to the current menu
+        }
+
+        public void AddSubMenu(string i_Name)
+        {
+            SubMenu subMenu = new SubMenu(i_Name);
+            subMenu.Chosen += On_Chosen; // Subscribe to the Chosen event
+            CurrentMenu.AddMenuItem(subMenu);
         }
 
 
@@ -39,6 +54,7 @@ namespace Ex04.Menus.Events
 
         public void Show()
         {
+            Ex02.ConsoleUtils.Screen.Clear(); //from guy ronen dll
             m_isRunning = true;
             while (m_isRunning)
             {
@@ -76,7 +92,7 @@ namespace Ex04.Menus.Events
                 else
                 {
                     Console.WriteLine("{0} chosen", i_MenuItem.Name);
-                    NonSubMenuItemChosen.Invoke(i_MenuItem); // Call the function associated with the menu item, if it exists
+                    NonSubMenuItemChosen.Invoke(i_MenuItem);
                 }
             }
         }
