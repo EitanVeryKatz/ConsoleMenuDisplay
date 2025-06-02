@@ -36,7 +36,16 @@ namespace Ex04.Menus.Events
             Console.WriteLine("******************");
             foreach (KeyValuePair<int, MenuItem> item in r_MenuItems)
             {
+                if (item.Key == 0 && r_MenuItems.Count > 1)
+                {
+                    continue; // Skip the "Back" or "Exit" option for now
+                }
+
                 Console.WriteLine($"{item.Key}. {item.Value.Name}");
+            }
+            if (r_MenuItems.Count > 1)
+            {
+                Console.WriteLine("0. {0}", r_MenuItems[0].Name); // Print "Back" or "Exit" option last
             }
 
         }
