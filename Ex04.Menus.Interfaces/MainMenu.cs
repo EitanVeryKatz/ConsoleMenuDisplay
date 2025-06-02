@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using Ex02.ConsoleUtils;
 
 namespace Ex04.Menus.Interfaces
 {
@@ -27,12 +28,27 @@ namespace Ex04.Menus.Interfaces
         }
 
 
+        public void AddMenuItem(string i_Name) //add menu item while creating one
+        {
+            MenuItem menuItem = new MenuItem(i_Name, this);
+            CurrentMenu.AddItem(menuItem);
+        }
+
+        public void AddSubMenu(string i_Name)
+        {
+            SubMenu subMenu = new SubMenu(i_Name, this);
+            CurrentMenu.AddItem(subMenu);
+        }
+
+
         public void EnterSubMenu(string i_SubMenuName)
         {
             CurrentMenu.TryEnter(i_SubMenuName);
         }
+
         public void Show()
         {
+            Ex02.ConsoleUtils.Screen.Clear();//from guy ronen dll
             m_isRunning = true;
             while (m_isRunning)
             {

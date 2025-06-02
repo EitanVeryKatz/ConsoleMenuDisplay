@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ex02.ConsoleUtils;
+
 
 namespace Ex04.Menus.Interfaces
 {
@@ -24,7 +26,7 @@ namespace Ex04.Menus.Interfaces
 
         internal void Show()// Override the Show method to display submenu items
         {
-            //add clear screen
+            Ex02.ConsoleUtils.Screen.Clear(); //from guy ronen dll
             Console.WriteLine("** {0} **",Name);
             Console.WriteLine("******************");
             foreach (KeyValuePair<int,MenuItem> item in r_MenuItems)
