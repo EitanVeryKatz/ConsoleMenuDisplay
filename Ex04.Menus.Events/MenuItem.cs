@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Events
 {
-    internal class MenuItem
+    public class MenuItem
     {
         public string Name { get; private set; }
-        
 
-        public MenuItem(string name)
+        internal MenuItem(string i_Name)
         {
-            Name = name;
+            Name = i_Name;
         }
 
         public event Action<MenuItem> Chosen;
