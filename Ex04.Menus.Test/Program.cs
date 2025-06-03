@@ -13,9 +13,9 @@ namespace Ex04.Menus.Test
     {
         public static void Main()
         {
-            MenuTester tester = new MenuTester();
+            MenuTester menuTester = new MenuTester();
 
-            tester.SetUpAndTestMenu();
+            menuTester.SetUpAndTestMenu();
         }
       
     }
