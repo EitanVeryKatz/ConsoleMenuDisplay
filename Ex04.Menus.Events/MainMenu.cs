@@ -24,8 +24,7 @@ namespace Ex04.Menus.Events
             m_DefaultMenu = CurrentMenu;
         }
 
-    
-
+       
         public void AddMenuItem(string i_Name)
         {
             MenuItem menuItem = new MenuItem(i_Name);

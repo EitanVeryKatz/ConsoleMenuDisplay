@@ -34,6 +34,7 @@ namespace Ex04.Menus.Test
             Console.WriteLine("Testing Events Menu System...");
             Events.MainMenu mainMenu = new Events.MainMenu("Delegates Main Menu");//main menu
             EventFunctionCallReciever functions = new EventFunctionCallReciever(mainMenu);
+
             mainMenu.AddSubMenu("Letters and Version");//submenu1
             mainMenu.AddSubMenu("Show Current Date/Time");//submenu2
             mainMenu.EnterSubMenu("Letters and Version");
@@ -51,19 +52,26 @@ namespace Ex04.Menus.Test
         {
             Console.WriteLine("Welcome to the Menu System Test!");
             Console.WriteLine("Please choose a menu system to test:\n1- interface\n2- events");
-            int choice = int.Parse(Console.ReadLine());
-            if (choice == 1)
+            if(int.TryParse(Console.ReadLine(), out int choice))
             {
-                setUpAndTestInterfaces();
-            }
-            else if (choice == 2)
-            {
-                setUpAndTestEvents();
+                if (choice == 1)
+                {
+                    setUpAndTestInterfaces();
+                }
+                else if (choice == 2)
+                {
+                    setUpAndTestEvents();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Exiting.");
+                }
             }
             else
             {
                 Console.WriteLine("Invalid choice. Exiting.");
             }
+
         }
 
 

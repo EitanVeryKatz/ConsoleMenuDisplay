@@ -76,7 +76,6 @@ namespace Ex04.Menus.Interfaces
                 }
                 else
                 {
-                    Console.WriteLine("{0} chosen", i_MenuItem.Name);
                     m_Listener.ReportChosen(i_MenuItem.Name);
                 }
             }

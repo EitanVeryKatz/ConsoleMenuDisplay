@@ -98,5 +98,17 @@ namespace Ex04.Menus.Events
                 }
             }
         }
+
+        private MenuItem getItem(string i_MenuItemName)
+        {
+            foreach(MenuItem menuItem in r_MenuItems.Values)
+            {
+                if (!(menuItem is SubMenu) && menuItem.Name == i_MenuItemName)
+                {
+                    return menuItem;
+                }
+            }
+            return null;
+        }
     }
 }

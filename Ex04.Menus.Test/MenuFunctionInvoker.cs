@@ -10,7 +10,7 @@ namespace Ex04.Menus.Test
 {
     internal class MenuFunctionInvoker
     {
-        private const string k_Version = "1.0.0";
+        private const string k_Version = "25.2.4.4480";
         public void InvokeMenuOption(string i_MenuItemName)
         {
             switch (i_MenuItemName)
