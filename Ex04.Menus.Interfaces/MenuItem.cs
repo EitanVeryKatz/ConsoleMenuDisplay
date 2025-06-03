@@ -2,22 +2,21 @@
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MenuItem
+    internal class MenuItem
     {
         public string Name { get; private set; }
-        protected IListener m_Listener;
-        
-        public MenuItem(string name, IListener listener = null)
+        protected IListener<MenuItem> m_Listener;
+
+        public MenuItem(string i_Name, IListener<MenuItem> i_Listener = null)
         {
-            Name = name;
-            m_Listener = listener;
+            Name = i_Name;
+            m_Listener = i_Listener;
         }
 
-        internal void SetListener(IListener listener)
+        internal void SetListener(IListener<MenuItem> i_Listener)
         {
-            m_Listener = listener;
+            m_Listener = i_Listener;
         }
-
 
         internal void ReportChosen()
         {

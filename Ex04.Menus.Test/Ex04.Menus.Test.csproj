@@ -36,12 +36,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventFunctionCallReciever.cs" />
+    <Compile Include="InterfaceFunctionCallReciever.cs" />
+    <Compile Include="MenuTester.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex04.Menus.Interfaces">
-      <HintPath>..\Ex04.Menus.Interfaces\bin\Debug\Ex04.Menus.Interfaces.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Ex04.Menus.Events\Ex04.Menus.Events.csproj">
+      <Project>{18b55542-1449-4f7f-89f0-0233169b9949}</Project>
+      <Name>Ex04.Menus.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ex04.Menus.Interfaces\Ex04.Menus.Interfaces.csproj">
+      <Project>{4ec4c66e-a23d-4652-a88b-a831242c7cdd}</Project>
+      <Name>Ex04.Menus.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,35 +1,38 @@
 ﻿using System;
 using System.Collections;
 
-namespace Ex04.Menus.Interfaces
+namespace Ex04.Menus.Events
 {
-    public class MainMenu : IListener<MenuItem>
+    public class MainMenu
     {
         private readonly Stack r_HistoryStack = new Stack();
-        private readonly SubMenu m_DefaultMenu;
+        private readonly SubMenu r_DefaultMenu;
+        public event Action<string> NonSubMenuItemChosen;
         private bool m_isRunning = false;
-        private IListener<string> m_Listener = null;
         private SubMenu CurrentMenu { get; set; } = null;
 
-        public MainMenu(string i_Title, IListener<string> i_Listener)
+        public MainMenu(string i_Title)
         {
-            m_Listener = i_Listener;
-            CurrentMenu = new SubMenu(i_Title, this);
+            CurrentMenu = new SubMenu(i_Title);
+            CurrentMenu.Chosen += menuItem_Chosen;
             CurrentMenu.SwitchBackToExit();
-            m_DefaultMenu = CurrentMenu;
+            CurrentMenu.GetItem("Exit").Chosen += menuItem_Chosen;
+            r_DefaultMenu = CurrentMenu;
         }
 
         public void AddMenuItem(string i_Name)
         {
-            MenuItem menuItem = new MenuItem(i_Name, this);
+            MenuItem menuItem = new MenuItem(i_Name);
 
             CurrentMenu.AddMenuItem(menuItem);
         }
 
         public void AddSubMenu(string i_Name)
         {
-            SubMenu subMenu = new SubMenu(i_Name, this);
+            SubMenu subMenu = new SubMenu(i_Name);
 
+            subMenu.GetItem("Back").Chosen += menuItem_Chosen;
+            subMenu.Chosen += menuItem_Chosen;
             CurrentMenu.AddMenuItem(subMenu);
         }
 
@@ -49,7 +52,12 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        void IListener<MenuItem>.ReportChosen(MenuItem i_MenuItem)
+        public MenuItem GetMenuItemFromCurrentSubMenu(string i_ItemName)
+        {
+            return CurrentMenu.GetItem(i_ItemName);
+        }
+
+        private void menuItem_Chosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is SubMenu subMenu)
             {
@@ -74,16 +82,12 @@ namespace Ex04.Menus.Interfaces
                         Console.WriteLine("No previous menu to return to.");
                     }
                 }
-                else
-                {
-                    m_Listener.ReportChosen(i_MenuItem.Name);
-                }
             }
         }
 
         public void ResetToDefaultMenu()
         {
-            CurrentMenu = m_DefaultMenu;
+            CurrentMenu = r_DefaultMenu;
             r_HistoryStack.Clear();
         }
     }
