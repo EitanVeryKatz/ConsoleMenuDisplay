@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using Ex02.ConsoleUtils;
-
 
 namespace Ex04.Menus.Interfaces
 {

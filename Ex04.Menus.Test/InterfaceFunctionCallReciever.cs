@@ -1,16 +1,13 @@
 ﻿using Ex04.Menus.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Test
 {
-    internal class InterfaceFunctionCallReciever:IListener<string>
+    internal class InterfaceFunctionCallReciever : IListener<string>
     {
         private const string k_Version = "25.2.4.4480";
+
         void IListener<string>.ReportChosen(string i_MenuItemName)
         {
             switch (i_MenuItemName)
@@ -31,8 +28,8 @@ namespace Ex04.Menus.Test
                     Console.WriteLine("Menu item '{0}' has been chosen, but no action is defined for it.", i_MenuItemName);
                     break;
             }
-            
         }
+
         private void showVersion()
         {
             Console.WriteLine("Version {0}", k_Version);

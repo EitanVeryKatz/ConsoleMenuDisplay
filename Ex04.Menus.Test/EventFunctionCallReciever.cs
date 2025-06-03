@@ -1,10 +1,6 @@
 ﻿using Ex04.Menus.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Test
 {
@@ -12,26 +8,25 @@ namespace Ex04.Menus.Test
     {
         private string k_Version;
 
-        public void addEventForAllItems(MainMenu i_menu)
+        public void addEventForAllItems(MainMenu i_Menu)
         {
-            i_menu.ResetToDefaultMenu();
-            i_menu.EnterSubMenu("Letters and Version");
-            i_menu.GetMenuItemFromCurrentSubMenu("Show Version").Chosen += showVersion;
-            i_menu.GetMenuItemFromCurrentSubMenu("Count Lowercase Letters").Chosen += countLowercaseLetters;
-            i_menu.ResetToDefaultMenu();
-            i_menu.EnterSubMenu("Show Current Date/Time");
-            i_menu.GetMenuItemFromCurrentSubMenu("Show Current Date").Chosen += showCurrentDate;
-            i_menu.GetMenuItemFromCurrentSubMenu("Show Current Time").Chosen += showCurrentTime;
+            i_Menu.ResetToDefaultMenu();
+            i_Menu.EnterSubMenu("Letters and Version");
+            i_Menu.GetMenuItemFromCurrentSubMenu("Show Version").Chosen += showVersion;
+            i_Menu.GetMenuItemFromCurrentSubMenu("Count Lowercase Letters").Chosen += countLowercaseLetters;
+            i_Menu.ResetToDefaultMenu();
+            i_Menu.EnterSubMenu("Show Current Date/Time");
+            i_Menu.GetMenuItemFromCurrentSubMenu("Show Current Date").Chosen += showCurrentDate;
+            i_Menu.GetMenuItemFromCurrentSubMenu("Show Current Time").Chosen += showCurrentTime;
+        }
 
-        }        
-
-        private void showVersion(MenuItem menuItem)
+        private void showVersion(MenuItem i_MenuItem)
         {
             Console.WriteLine("Version {0}", k_Version);
             Thread.Sleep(1000);
         }
 
-        private void countLowercaseLetters(MenuItem menuItem)
+        private void countLowercaseLetters(MenuItem i_MenuItem)
         {
             Console.WriteLine("Please enter a sentance for lower case letters count: ");
             string SentanceToCountLowerCase = Console.ReadLine();
@@ -49,17 +44,16 @@ namespace Ex04.Menus.Test
             Thread.Sleep(1000);
         }
 
-        private void showCurrentDate(MenuItem menuItem)
+        private void showCurrentDate(MenuItem i_MenuItem)
         {
             Console.WriteLine($"Current Date: {DateTime.Now.ToShortDateString()}");
             Thread.Sleep(1000);
         }
 
-        private void showCurrentTime(MenuItem menuItem)
+        private void showCurrentTime(MenuItem i_MenuItem)
         {
             Console.WriteLine($"Current Time: {DateTime.Now.ToShortTimeString()}");
             Thread.Sleep(1000);
         }
-        
     }
 }

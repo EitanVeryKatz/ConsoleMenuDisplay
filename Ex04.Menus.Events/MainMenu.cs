@@ -1,39 +1,37 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ex02.ConsoleUtils;
 
 namespace Ex04.Menus.Events
 {
     public class MainMenu
     {
         private readonly Stack r_HistoryStack = new Stack();
+        private readonly SubMenu r_DefaultMenu;
+        public event Action<string> NonSubMenuItemChosen;
         private bool m_isRunning = false;
         private SubMenu CurrentMenu { get; set; } = null;
-        private readonly SubMenu m_DefaultMenu;
-        public event Action<string> NonSubMenuItemChosen;
 
         public MainMenu(string i_Title)
         {
             CurrentMenu = new SubMenu(i_Title);
             CurrentMenu.Chosen += On_Chosen;
             CurrentMenu.SwitchBackToExit();
-            m_DefaultMenu = CurrentMenu;
+            CurrentMenu.GetItem("Exit").Chosen += On_Chosen;
+            r_DefaultMenu = CurrentMenu;
         }
 
-       
         public void AddMenuItem(string i_Name)
         {
             MenuItem menuItem = new MenuItem(i_Name);
+
             CurrentMenu.AddMenuItem(menuItem);
         }
 
         public void AddSubMenu(string i_Name)
         {
             SubMenu subMenu = new SubMenu(i_Name);
+
+            subMenu.GetItem("Back").Chosen += On_Chosen;
             subMenu.Chosen += On_Chosen;
             CurrentMenu.AddMenuItem(subMenu);
         }
@@ -84,13 +82,12 @@ namespace Ex04.Menus.Events
                         Console.WriteLine("No previous menu to return to.");
                     }
                 }
-                
             }
         }
 
         public void ResetToDefaultMenu()
         {
-            CurrentMenu = m_DefaultMenu;
+            CurrentMenu = r_DefaultMenu;
             r_HistoryStack.Clear();
         }
     }

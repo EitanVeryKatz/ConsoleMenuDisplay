@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+
 namespace Ex04.Menus.Events
 {
     internal class SubMenu : MenuItem
     {
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
+
         public SubMenu(string i_Name) : base(i_Name)
         {
-            r_MenuItems.Add(0, new MenuItem("Back")); // Add a "Back" option
+            r_MenuItems.Add(0, new MenuItem("Back"));
         }
 
         internal void SwitchBackToExit()
         {
-            r_MenuItems[0] = new MenuItem("Exit"); // Change "Back" to "Exit"
+            r_MenuItems[0] = new MenuItem("Exit");
         }
 
         internal void AddMenuItem(MenuItem i_MenuItem)
@@ -26,49 +25,53 @@ namespace Ex04.Menus.Events
 
         internal void AddMenuItem(string i_Name)
         {
-            MenuItem menuItem = new MenuItem(i_Name); // Create a new MenuItem
-            r_MenuItems.Add(r_MenuItems.Count, menuItem); // Add it to the dictionary
+            MenuItem menuItem = new MenuItem(i_Name);
+
+            r_MenuItems.Add(r_MenuItems.Count, menuItem);
         }
 
         internal MenuItem GetItem(string i_ItemName)
         {
             MenuItem itemToReturn = null;
-            foreach(MenuItem menuItem in r_MenuItems.Values)
+
+            foreach (MenuItem menuItem in r_MenuItems.Values)
             {
-                if(!(menuItem is SubMenu) && menuItem.Name == i_ItemName)
+                if (!(menuItem is SubMenu) && menuItem.Name == i_ItemName)
                 {
                     itemToReturn = menuItem;
                     break;
                 }
             }
+
             return itemToReturn;
         }
 
-        internal void Show()// Override the Show method to display submenu items
+        internal void Show()
         {
-            Console.Clear(); //from guy ronen dll
+            Console.Clear();
             Console.WriteLine("** {0} **", Name);
             Console.WriteLine("-----------------------------");
-            foreach (KeyValuePair<int, MenuItem> item in r_MenuItems)
+            foreach (KeyValuePair<int, MenuItem> menuItem in r_MenuItems)
             {
-                if (item.Key == 0 && r_MenuItems.Count > 1)
+                if (menuItem.Key == 0 && r_MenuItems.Count > 1)
                 {
                     continue;
                 }
 
-                Console.WriteLine($"{item.Key}. {item.Value.Name}");
+                Console.WriteLine($"{menuItem.Key}. {menuItem.Value.Name}");
             }
+
             if (r_MenuItems.Count > 1)
             {
                 Console.WriteLine("0. {0}", r_MenuItems[0].Name);
             }
-
         }
 
         public void HandleInput()
         {
             string choice = getInput();
             MenuItem selectedItem = r_MenuItems[int.Parse(choice)];
+
             if (selectedItem != null)
             {
                 OnChosen(selectedItem);
@@ -85,20 +88,24 @@ namespace Ex04.Menus.Events
             {
                 Console.WriteLine("Please enter your choice (1-{0} or 0 to go back):", r_MenuItems.Count - 1);
             }
+
             string inputStr = Console.ReadLine();
+
             if (string.IsNullOrEmpty(inputStr))
             {
                 Console.WriteLine("Input cannot be empty. Please try again.");
-                return getInput();
+                inputStr = getInput();
             }
+
             if (!int.TryParse(inputStr, out int inputInteger) || !r_MenuItems.ContainsKey(inputInteger))
             {
                 Console.Clear();
                 Console.WriteLine("Invalid choice. Please try again.");
                 Thread.Sleep(1000);
                 Show();
-                return getInput();
+                inputStr = getInput();
             }
+
             Console.Clear();
 
             return inputStr;
@@ -106,27 +113,14 @@ namespace Ex04.Menus.Events
 
         internal void TryEnter(string i_SubMenuName)
         {
-
-            foreach (MenuItem item in r_MenuItems.Values)
+            foreach (MenuItem menuItem in r_MenuItems.Values)
             {
-                if (item is SubMenu subMenuToEnter && item.Name == i_SubMenuName)
+                if (menuItem is SubMenu subMenuToEnter && menuItem.Name == i_SubMenuName)
                 {
                     OnChosen(subMenuToEnter);
                     break;
                 }
             }
-        }
-
-        private MenuItem getItem(string i_MenuItemName)
-        {
-            foreach(MenuItem menuItem in r_MenuItems.Values)
-            {
-                if (!(menuItem is SubMenu) && menuItem.Name == i_MenuItemName) 
-                {
-                    return menuItem;
-                }
-            }
-            return null;
         }
     }
 }

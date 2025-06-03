@@ -37,18 +37,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="MenusTestClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IListener.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="SubMenu.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Ex02.ConsoleUtils">
-      <HintPath>..\..\..\..\OneDrive\Desktop\לימודים\C# .NET\סי שארפ מטלה 4\Ex02.ConsoleUtils.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

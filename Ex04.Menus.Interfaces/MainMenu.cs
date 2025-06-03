@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using Ex02.ConsoleUtils;
 
 namespace Ex04.Menus.Interfaces
 {
     public class MainMenu : IListener<MenuItem>
     {
         private readonly Stack r_HistoryStack = new Stack();
-        private bool m_isRunning = false;
-        private SubMenu CurrentMenu { get; set; } = null;
         private readonly SubMenu m_DefaultMenu;
+        private bool m_isRunning = false;
         private IListener<string> m_Listener = null;
+        private SubMenu CurrentMenu { get; set; } = null;
 
         public MainMenu(string i_Title, IListener<string> i_Listener)
         {
@@ -24,12 +22,14 @@ namespace Ex04.Menus.Interfaces
         public void AddMenuItem(string i_Name)
         {
             MenuItem menuItem = new MenuItem(i_Name, this);
+
             CurrentMenu.AddMenuItem(menuItem);
         }
 
         public void AddSubMenu(string i_Name)
         {
             SubMenu subMenu = new SubMenu(i_Name, this);
+
             CurrentMenu.AddMenuItem(subMenu);
         }
 

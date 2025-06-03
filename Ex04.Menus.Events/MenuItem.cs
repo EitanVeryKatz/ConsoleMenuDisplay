@@ -1,33 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex04.Menus.Events
 {
     public class MenuItem
     {
         public string Name { get; private set; }
+        public event Action<MenuItem> Chosen;
 
         internal MenuItem(string i_Name)
         {
             Name = i_Name;
         }
 
-        public event Action<MenuItem> Chosen;
-
-        protected void OnChosen(MenuItem item)
+        protected void OnChosen(MenuItem i_MenuItem)
         {
-            if(item is SubMenu)
+            if (i_MenuItem is SubMenu)
             {
-                Chosen?.Invoke(item);
+                Chosen?.Invoke(i_MenuItem);
             }
             else
             {
-                item.Chosen.Invoke(item);
+                i_MenuItem.Chosen.Invoke(i_MenuItem);
             }
-            
         }
     }
 }
