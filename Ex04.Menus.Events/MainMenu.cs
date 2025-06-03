@@ -59,7 +59,8 @@ namespace Ex04.Menus.Events
 
         public void Show()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            //ConsoleUtils.Screen.Clear();
+            Console.Clear();
             m_isRunning = true;
             while (m_isRunning)
             {

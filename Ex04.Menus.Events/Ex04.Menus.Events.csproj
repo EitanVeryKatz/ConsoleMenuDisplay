@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ex02.ConsoleUtils">
-      <HintPath>..\..\..\..\OneDrive\Desktop\לימודים\C# .NET\סי שארפ מטלה 4\Ex02.ConsoleUtils.dll</HintPath>
+      <HintPath>..\..\..\EX2\Ex02.ConsoleUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

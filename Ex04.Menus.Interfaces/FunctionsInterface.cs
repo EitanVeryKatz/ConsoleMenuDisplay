@@ -10,7 +10,6 @@ namespace Ex04.Menus.Interfaces
 {
     public class FunctionsInterface : IListener
     {
-        private readonly List<MenuItem> r_MenuItems = new List<MenuItem>();
         void IListener.ReportChosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem.Name == "Show Version")
@@ -20,9 +19,20 @@ namespace Ex04.Menus.Interfaces
             }
             else if (i_MenuItem.Name == "Count Lowercase Letters")
             {
-                Console.WriteLine("Counting lowercase letters in a sample string...");
-                Thread.Sleep(1000);
+                Console.WriteLine("Please enter a sentance for lower case letters count: ");
+                string SentanceToCountLowerCase = Console.ReadLine();
+                int lowerCaseLetterCounter = 0;
 
+                foreach (char letter in SentanceToCountLowerCase)
+                {
+                    if (char.IsLower(letter))
+                    {
+                        lowerCaseLetterCounter++;
+                    }
+                }
+
+                Console.WriteLine("Number of lowercase letters in sentance is: {0}",lowerCaseLetterCounter);
+                Thread.Sleep(1000);
             }
             else if (i_MenuItem.Name == "Show Current Date")
             {
