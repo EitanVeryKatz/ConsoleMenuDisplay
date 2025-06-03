@@ -28,7 +28,6 @@ namespace Ex04.Menus.Events
         public void AddMenuItem(string i_Name)
         {
             MenuItem menuItem = new MenuItem(i_Name);
-            menuItem.Chosen += On_Chosen;
             CurrentMenu.AddMenuItem(menuItem);
         }
 
@@ -56,6 +55,11 @@ namespace Ex04.Menus.Events
             }
         }
 
+        public MenuItem GetMenuItemFromCurrentSubMenu(string i_ItemName)
+        {
+            return CurrentMenu.GetItem(i_ItemName);
+        }
+
         void On_Chosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is SubMenu subMenu)
@@ -81,10 +85,7 @@ namespace Ex04.Menus.Events
                         Console.WriteLine("No previous menu to return to.");
                     }
                 }
-                else
-                {
-                    NonSubMenuItemChosen.Invoke(i_MenuItem.Name);
-                }
+                
             }
         }
 

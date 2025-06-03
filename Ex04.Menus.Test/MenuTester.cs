@@ -33,8 +33,7 @@ namespace Ex04.Menus.Test
         {
             Console.WriteLine("Testing Events Menu System...");
             Events.MainMenu mainMenu = new Events.MainMenu("Delegates Main Menu");//main menu
-            EventFunctionCallReciever functions = new EventFunctionCallReciever(mainMenu);
-
+            EventFunctionCallReciever functions = new EventFunctionCallReciever();
             mainMenu.AddSubMenu("Letters and Version");//submenu1
             mainMenu.AddSubMenu("Show Current Date/Time");//submenu2
             mainMenu.EnterSubMenu("Letters and Version");
@@ -44,6 +43,7 @@ namespace Ex04.Menus.Test
             mainMenu.EnterSubMenu("Show Current Date/Time");
             mainMenu.AddMenuItem("Show Current Date");
             mainMenu.AddMenuItem("Show Current Time");
+            functions.addEventForAllItems(mainMenu);
             mainMenu.ResetToDefaultMenu();
             mainMenu.Show();
         }

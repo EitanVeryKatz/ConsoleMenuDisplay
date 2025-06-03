@@ -29,6 +29,20 @@ namespace Ex04.Menus.Events
             r_MenuItems.Add(r_MenuItems.Count, menuItem); // Add it to the dictionary
         }
 
+        internal MenuItem GetItem(string i_ItemName)
+        {
+            MenuItem itemToReturn = null;
+            foreach(MenuItem menuItem in r_MenuItems.Values)
+            {
+                if(!(menuItem is SubMenu) && menuItem.Name == i_ItemName)
+                {
+                    itemToReturn = menuItem;
+                    break;
+                }
+            }
+            return itemToReturn;
+        }
+
         internal void Show()// Override the Show method to display submenu items
         {
             Ex02.ConsoleUtils.Screen.Clear(); //from guy ronen dll

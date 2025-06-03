@@ -19,7 +19,15 @@ namespace Ex04.Menus.Events
 
         protected void OnChosen(MenuItem item)
         {
-            Chosen?.Invoke(item);
+            if(item is SubMenu)
+            {
+                Chosen?.Invoke(item);
+            }
+            else
+            {
+                item.Chosen.Invoke(item);
+            }
+            
         }
     }
 }
