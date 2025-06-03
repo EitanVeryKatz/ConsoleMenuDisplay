@@ -9,6 +9,7 @@ namespace Ex04.Menus.Events
     internal class MenuItem
     {
         public string Name { get; private set; }
+        
 
         public MenuItem(string name)
         {
