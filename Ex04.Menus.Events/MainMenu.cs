@@ -14,22 +14,14 @@ namespace Ex04.Menus.Events
         private bool m_isRunning = false;
         private SubMenu CurrentMenu { get; set; } = null;
         private readonly SubMenu m_DefaultMenu;
-        Action<string> NonSubMenuItemChosen;
+        public event Action<string> NonSubMenuItemChosen;
 
-        public MainMenu(string i_Title, FunctionsEvents functions)
+        public MainMenu(string i_Title)
         {
             CurrentMenu = new SubMenu(i_Title);
             CurrentMenu.Chosen += On_Chosen;
             CurrentMenu.SwitchBackToExit();
             m_DefaultMenu = CurrentMenu;
-            if (functions?.GetAction() != null)
-            {
-                NonSubMenuItemChosen = functions.GetAction();
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(functions), "FunctionsEvents instance cannot be null or must provide a valid action.");
-            }
         }
 
     

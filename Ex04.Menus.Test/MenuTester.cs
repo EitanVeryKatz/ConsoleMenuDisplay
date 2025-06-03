@@ -14,7 +14,7 @@ namespace Ex04.Menus.Test
         private void setUpAndTestInterfaces()
         {
             Console.WriteLine("Testing Interfaces Menu System...");
-            FunctionsInterface functions = new FunctionsInterface();
+            InterfaceFunctionCallReciever functions = new InterfaceFunctionCallReciever();
             Interfaces.MainMenu mainMenu = new Interfaces.MainMenu("Delegates Main Menu", functions);//main menu
             mainMenu.AddSubMenu("Letters and Version");//submenu1
             mainMenu.AddSubMenu("Show Current Date/Time");//submenu2
@@ -31,9 +31,9 @@ namespace Ex04.Menus.Test
 
         private void setUpAndTestEvents()
         {
-            FunctionsEvents functions = new FunctionsEvents();
             Console.WriteLine("Testing Events Menu System...");
-            Events.MainMenu mainMenu = new Events.MainMenu("Delegates Main Menu", functions);//main menu
+            Events.MainMenu mainMenu = new Events.MainMenu("Delegates Main Menu");//main menu
+            EventFunctionCallReciever functions = new EventFunctionCallReciever(mainMenu);
             mainMenu.AddSubMenu("Letters and Version");//submenu1
             mainMenu.AddSubMenu("Show Current Date/Time");//submenu2
             mainMenu.EnterSubMenu("Letters and Version");

@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections;
+﻿using Ex04.Menus.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace Ex04.Menus.Events
+namespace Ex04.Menus.Test
 {
-    public class FunctionsEvents
+    internal class EventFunctionCallReciever
     {
-
+        public EventFunctionCallReciever(Events.MainMenu i_menu)
+        {
+            i_menu.NonSubMenuItemChosen += ReportChosen;
+        }
         internal void ReportChosen(string i_MenuItemName)
         {
             if (i_MenuItemName == "Show Version")

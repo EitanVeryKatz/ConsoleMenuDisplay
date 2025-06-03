@@ -40,7 +40,6 @@
     <None Include="ClassDiagramEvents.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FunctionsEvents.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="SubMenu.cs" />

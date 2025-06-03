@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using Ex04.Menus.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace Ex04.Menus.Interfaces
+namespace Ex04.Menus.Test
 {
-    public class FunctionsInterface : IListener<string>
+    internal class InterfaceFunctionCallReciever:IListener<string>
     {
         void IListener<string>.ReportChosen(string i_MenuItemName)
         {
@@ -31,7 +31,7 @@ namespace Ex04.Menus.Interfaces
                     }
                 }
 
-                Console.WriteLine("Number of lowercase letters in sentance is: {0}",lowerCaseLetterCounter);
+                Console.WriteLine("Number of lowercase letters in sentance is: {0}", lowerCaseLetterCounter);
                 Thread.Sleep(1000);
             }
             else if (i_MenuItemName == "Show Current Date")
@@ -52,4 +52,3 @@ namespace Ex04.Menus.Interfaces
         }
     }
 }
-
