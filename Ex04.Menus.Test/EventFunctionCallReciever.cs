@@ -6,7 +6,7 @@ namespace Ex04.Menus.Test
 {
     internal class EventFunctionCallReciever
     {
-        private string k_Version;
+        private const string k_Version = "25.2.4.4480";
 
         public void addEventForAllItems(MainMenu i_Menu)
         {
