@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Ex02.ConsoleUtils;
 
 
@@ -26,9 +27,9 @@ namespace Ex04.Menus.Interfaces
 
         internal void Show()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            Console.Clear();
             Console.WriteLine("** {0} **", Name);
-            Console.WriteLine("******************");
+            Console.WriteLine("-----------------------------");
             foreach (KeyValuePair<int, MenuItem> item in r_MenuItems)
             {
                 if (item.Key == 0 && r_MenuItems.Count > 1)
@@ -56,6 +57,7 @@ namespace Ex04.Menus.Interfaces
 
         private string getInput()
         {
+
             if (r_MenuItems[0].Name == "Exit")
             {
                 Console.WriteLine("Please enter your choice (1-{0} or 0 to exit):", r_MenuItems.Count - 1);
@@ -64,20 +66,23 @@ namespace Ex04.Menus.Interfaces
             {
                 Console.WriteLine("Please enter your choice (1-{0} or 0 to go back):", r_MenuItems.Count - 1);
             }
-            string input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
+            string inputStr = Console.ReadLine();
+            if (string.IsNullOrEmpty(inputStr))
             {
                 Console.WriteLine("Input cannot be empty. Please try again.");
-                return getInput();
+                inputStr = getInput();
             }
-            if (!r_MenuItems.ContainsKey(int.Parse(input)))
+            if (!int.TryParse(inputStr,out int inputInteger) || !r_MenuItems.ContainsKey(inputInteger))
             {
+                Console.Clear();
                 Console.WriteLine("Invalid choice. Please try again.");
-                return getInput();
+                Thread.Sleep(1000);
+                Show();
+                inputStr = getInput();
             }
             Console.Clear();
 
-            return input;
+            return inputStr;
         }
 
         internal void TryEnter(string i_SubMenuName)

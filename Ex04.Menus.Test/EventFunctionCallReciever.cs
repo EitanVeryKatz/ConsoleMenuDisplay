@@ -21,7 +21,7 @@ namespace Ex04.Menus.Test
             i_menu.ResetToDefaultMenu();
             i_menu.EnterSubMenu("Show Current Date/Time");
             i_menu.GetMenuItemFromCurrentSubMenu("Show Current Date").Chosen += showCurrentDate;
-            i_menu.GetMenuItemFromCurrentSubMenu("Show Current Time").Chosen += showCurrentDate;
+            i_menu.GetMenuItemFromCurrentSubMenu("Show Current Time").Chosen += showCurrentTime;
 
         }        
 
@@ -45,7 +45,7 @@ namespace Ex04.Menus.Test
                 }
             }
 
-            Console.WriteLine("Number of lowercase letters in sentance is: {0}", lowerCaseLetterCounter);
+            Console.WriteLine("Number of lowercase letters in sentaece is: {0}", lowerCaseLetterCounter);
             Thread.Sleep(1000);
         }
 

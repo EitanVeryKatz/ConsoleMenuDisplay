@@ -38,7 +38,6 @@
   <ItemGroup>
     <Compile Include="EventFunctionCallReciever.cs" />
     <Compile Include="InterfaceFunctionCallReciever.cs" />
-    <Compile Include="MenuFunctionInvoker.cs" />
     <Compile Include="MenuTester.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

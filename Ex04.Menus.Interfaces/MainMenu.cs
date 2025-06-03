@@ -40,7 +40,7 @@ namespace Ex04.Menus.Interfaces
 
         public void Show()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            Console.Clear();
             m_isRunning = true;
             while (m_isRunning)
             {
