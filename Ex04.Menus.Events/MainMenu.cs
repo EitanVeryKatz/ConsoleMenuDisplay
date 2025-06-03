@@ -14,9 +14,9 @@ namespace Ex04.Menus.Events
         public MainMenu(string i_Title)
         {
             CurrentMenu = new SubMenu(i_Title);
-            CurrentMenu.Chosen += On_Chosen;
+            CurrentMenu.Chosen += menuItem_Chosen;
             CurrentMenu.SwitchBackToExit();
-            CurrentMenu.GetItem("Exit").Chosen += On_Chosen;
+            CurrentMenu.GetItem("Exit").Chosen += menuItem_Chosen;
             r_DefaultMenu = CurrentMenu;
         }
 
@@ -31,8 +31,8 @@ namespace Ex04.Menus.Events
         {
             SubMenu subMenu = new SubMenu(i_Name);
 
-            subMenu.GetItem("Back").Chosen += On_Chosen;
-            subMenu.Chosen += On_Chosen;
+            subMenu.GetItem("Back").Chosen += menuItem_Chosen;
+            subMenu.Chosen += menuItem_Chosen;
             CurrentMenu.AddMenuItem(subMenu);
         }
 
@@ -57,7 +57,7 @@ namespace Ex04.Menus.Events
             return CurrentMenu.GetItem(i_ItemName);
         }
 
-        void On_Chosen(MenuItem i_MenuItem)
+        private void menuItem_Chosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is SubMenu subMenu)
             {
