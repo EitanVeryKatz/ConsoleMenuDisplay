@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Events
 {
-    public class MenuItem
+    internal class MenuItem
     {
         public string Name { get; private set; }
 

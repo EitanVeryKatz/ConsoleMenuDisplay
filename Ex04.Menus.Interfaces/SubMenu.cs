@@ -6,10 +6,10 @@ using Ex02.ConsoleUtils;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class SubMenu : MenuItem
+    internal class SubMenu : MenuItem
     {
         private readonly Dictionary<int, MenuItem> r_MenuItems = new Dictionary<int, MenuItem>();
-        public SubMenu(string i_Name, IListener i_Listener) : base(i_Name, i_Listener)
+        public SubMenu(string i_Name, IListener<MenuItem> i_Listener) : base(i_Name, i_Listener)
         {
             r_MenuItems.Add(0, new MenuItem("Back", i_Listener));
         }

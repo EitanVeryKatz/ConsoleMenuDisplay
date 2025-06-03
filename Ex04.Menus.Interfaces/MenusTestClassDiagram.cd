@@ -22,11 +22,11 @@
       <FileName>SubMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Ex04.Menus.Interfaces.IListener">
+  <Interface Name="Ex04.Menus.Interfaces.IListener<MenuItem>">
     <Position X="4.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IListener.cs</FileName>
+      <FileName>IListener<MenuItem>.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

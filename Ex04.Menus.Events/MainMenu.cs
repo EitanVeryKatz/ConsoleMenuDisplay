@@ -14,7 +14,7 @@ namespace Ex04.Menus.Events
         private bool m_isRunning = false;
         private SubMenu CurrentMenu { get; set; } = null;
         private readonly SubMenu m_DefaultMenu;
-        Action<MenuItem> NonSubMenuItemChosen;
+        Action<string> NonSubMenuItemChosen;
 
         public MainMenu(string i_Title, FunctionsEvents functions)
         {
@@ -32,11 +32,7 @@ namespace Ex04.Menus.Events
             }
         }
 
-        public void AddMenuItem(MenuItem i_MenuItem)
-        {
-            CurrentMenu.AddMenuItem(i_MenuItem);
-            i_MenuItem.Chosen += On_Chosen;
-        }
+    
 
         public void AddMenuItem(string i_Name)
         {
@@ -96,7 +92,7 @@ namespace Ex04.Menus.Events
                 }
                 else
                 {
-                    NonSubMenuItemChosen.Invoke(i_MenuItem);
+                    NonSubMenuItemChosen.Invoke(i_MenuItem.Name);
                 }
             }
         }

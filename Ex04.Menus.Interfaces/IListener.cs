@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    public interface IListener
+    public interface IListener<T>
     {
-        void ReportChosen(MenuItem i_menuItem);
+        void ReportChosen(T i_menuItem);
     }
 }

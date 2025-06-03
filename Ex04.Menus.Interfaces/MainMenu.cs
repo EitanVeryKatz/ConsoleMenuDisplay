@@ -5,15 +5,15 @@ using Ex02.ConsoleUtils;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MainMenu : IListener
+    public class MainMenu : IListener<MenuItem>
     {
         private readonly Stack r_HistoryStack = new Stack();
         private bool m_isRunning = false;
         private SubMenu CurrentMenu { get; set; } = null;
         private readonly SubMenu m_DefaultMenu;
-        private IListener m_Listener = null;
+        private IListener<string> m_Listener = null;
 
-        public MainMenu(string i_Title, IListener i_Listener)
+        public MainMenu(string i_Title, IListener<string> i_Listener)
         {
             m_Listener = i_Listener;
             CurrentMenu = new SubMenu(i_Title, this);
@@ -21,14 +21,9 @@ namespace Ex04.Menus.Interfaces
             m_DefaultMenu = CurrentMenu;
         }
 
-        public void AddMenuItem(MenuItem i_MenuItem)
-        {
-            CurrentMenu.AddMenuItem(i_MenuItem);
-        }
-
         public void AddMenuItem(string i_Name)
         {
-            MenuItem menuItem = new MenuItem(i_Name, m_Listener);
+            MenuItem menuItem = new MenuItem(i_Name, this);
             CurrentMenu.AddMenuItem(menuItem);
         }
 
@@ -54,7 +49,7 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        void IListener.ReportChosen(MenuItem i_MenuItem)
+        void IListener<MenuItem>.ReportChosen(MenuItem i_MenuItem)
         {
             if (i_MenuItem is SubMenu subMenu)
             {
@@ -82,7 +77,7 @@ namespace Ex04.Menus.Interfaces
                 else
                 {
                     Console.WriteLine("{0} chosen", i_MenuItem.Name);
-                    m_Listener.ReportChosen(i_MenuItem);
+                    m_Listener.ReportChosen(i_MenuItem.Name);
                 }
             }
         }
